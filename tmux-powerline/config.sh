@@ -40,7 +40,7 @@
 
 # date.sh {
 	# date(1) format for the date. If you don't, for some reason, like ISO 8601 format you might want to have "%D" or "%m/%d/%Y".
-	export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
+	export TMUX_POWERLINE_SEG_DATE_FORMAT="%y/%m/%d"
 # }
 
 # disk_usage.sh {
@@ -206,7 +206,7 @@
 # }
 
 # weather.sh {
-	# The data provider to use. Currently only "yahoo" is supported.
+	# The data provider to use. Currently only "yrno" is supported.
 	export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="yrno"
 	# What unit to use. Can be any of {c,f,k}.
 	export TMUX_POWERLINE_SEG_WEATHER_UNIT="c"
@@ -220,4 +220,26 @@
 	# Latitude and Longtitude for use with yr.no
 	TMUX_POWERLINE_SEG_WEATHER_LAT="-6.223743335328098"
 	TMUX_POWERLINE_SEG_WEATHER_LON="106.87943993075356"
+# }
+
+# air.sh {
+    # The data provider to use. Currently only "openweather" is supported.
+    export TMUX_POWERLINE_SEG_AIR_DATA_PROVIDER="openweather"
+    # How often to update the air quality in seconds.
+    export TMUX_POWERLINE_SEG_AIR_UPDATE_PERIOD="600"
+    # Location of the JSON parser, jq 
+    export TMUX_POWERLINE_SEG_AIR_JSON="jq"
+    # Your location
+    # Latitude and Longitude:
+    TMUX_POWERLINE_SEG_AIR_LAT="-6.223743335328098"
+    TMUX_POWERLINE_SEG_AIR_LON="106.87943993075356"
+    # Your Open Weather API Key:
+    TMUX_POWERLINE_SEG_AIR_OPEN_WEATHER_API_KEY=""
+# }
+
+# locator.sh {
+#
+#
+#
+#
 # }

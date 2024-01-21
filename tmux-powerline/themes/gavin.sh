@@ -1,5 +1,6 @@
 # Default Theme
 # If changes made here does not take effect, then try to re-create the tmux session to force reload.
+source /Users/gavinkondrath/.config/tmux-powerline/segments/air.sh
 
 if patched_font_in_use; then
 	TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
@@ -81,8 +82,9 @@ if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 		"hostname #99b164 #fefbf0" \
         "time #eceadc #859182 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}"
         "tmux_session_info #eceadc #859182"  \
-        "earthquake #f57d26 #859182" \
-        "indicator" \
+        "air ${TMUX_POWERLINE_SEG_AIR_COLOR} #fefbf0" \
+        # "earthquake #f57d26 #859182" \
+        "indicator"\
 		# "ifstat 30 255" \
 		# "ifstat_sys 30 255" \
 		# "lan_ip 24 255 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
@@ -106,7 +108,7 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 		#"tmux_mem_cpu_load 234 136" \
 		# "battery 137 127" \
 		"weather #3A94C5 #fefbf0" \
-		#"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
+		# "rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
 		#"xkb_layout 125 117" \
 		"date_day #99b164 #fefbf0" \
 		"date #99b164 #fefbf0 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
