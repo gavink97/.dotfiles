@@ -1,2 +1,4 @@
 # Gavin's dotfiles
-My ultra scuffed neovim tmux conf files, please shield your eyes.
+My configuration files for Neovim, Tmux, & Alacritty
+
+Make sure you have the Fire Mono Nerd Font installed before use or use your preferred font by modifying `alacritty.toml`

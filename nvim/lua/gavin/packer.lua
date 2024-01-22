@@ -4,20 +4,25 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-    -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
-        -- or                            , branch = '0.1.x',
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
+    }
+
+    use {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        requires = { {"nvim-lua/plenary.nvim"} }
     }
 
     use({
         'folke/trouble.nvim',
         config = function()
             require("trouble").setup {
-                icons = false,
+                --icons = false,
             }
         end
     })
@@ -27,45 +32,45 @@ return require('packer').startup(function(use)
         run = function()
             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
             ts_update()
-        end,}
-        use('nvim-treesitter/playground')
-        use({
-            'sainnhe/everforest',
-            as = 'everforest',
-            config = function()
-                vim.cmd('colorscheme everforest')
-            end
+        end,
+    }
+
+    use({
+        'sainnhe/everforest',
+        as = 'everforest',
+        config = function()
+            vim.cmd('colorscheme everforest')
+        end
         })
-        use {
-            'nvim-tree/nvim-tree.lua',
-            requires = {
-                'nvim-tree/nvim-web-devicons', -- optional
-            },
-        }
-    use 'yamatsum/nvim-cursorline'
-    use 'sidebar-nvim/sidebar.nvim'
-    use ('mg979/vim-visual-multi')
- 	use('nvim-lua/plenary.nvim')
-	use('ThePrimeagen/harpoon')
-	use('mbbill/undotree')
-	use('tpope/vim-fugitive')
-    use("laytan/cloak.nvim")
-    use("edkolev/tmuxline.vim")
-    use 'm4xshen/autoclose.nvim'
-    use('christoomey/vim-tmux-navigator')
-    use 'lewis6991/gitsigns.nvim'
-	use {
+
+    use {
+        'mg979/vim-visual-multi',
+        branch = 'master'
+    }
+
+    use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 	}
+
     use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
     })
+
+    use 'nvim-tree/nvim-web-devicons'
+    use('nvim-treesitter/playground')
+    use 'yamatsum/nvim-cursorline'
+	use('mbbill/undotree')
+	use('tpope/vim-fugitive')
+    use("laytan/cloak.nvim")
+    use 'm4xshen/autoclose.nvim'
+    use('christoomey/vim-tmux-navigator')
+    use 'lewis6991/gitsigns.nvim'
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
+		branch = 'v3.x',
 		requires = {
 			-- LSP Support
 			{'neovim/nvim-lspconfig'},             -- Required
@@ -75,7 +80,12 @@ return require('packer').startup(function(use)
 			-- Autocompletion
 			{'hrsh7th/nvim-cmp'},     -- Required
 			{'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'hrsh7th/cmp-buffer'},
+            {'hrsh7th/cmp-path'},
+            {'saadparwaiz1/cmp_luasnip'},
+            {'hrsh7th/cmp-nvim-lua'},
 			{'L3MON4D3/LuaSnip'},     -- Required
+            {'rafamadriz/friendly-snippets'}
 		}
 	}
 

@@ -238,8 +238,10 @@
 # }
 
 # locator.sh {
-#
-#
-#
-#
+    # Do you want to automatically track your coordinates?
+    TMUX_POWERLINE_SEG_LOCATOR_ON=true
+    # Location of the JSON parser, jq 
+    export TMUX_POWERLINE_SEG_AIR_JSON="jq"
+    # Your IP GEOLOCATION API KEY:
+    TMUX_POWERLINE_SEG_AIR_IP_GEOLOCATION_API_KEY=""
 # }

@@ -44,7 +44,13 @@ require('lualine').setup {
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
-    lualine_y = {},
+    lualine_y = {
+        {
+            'filename',
+            path = 3,
+            shorting_target = 40,
+        }
+    },
     lualine_z = {'branch'}
 },
     winbar = {
