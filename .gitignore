@@ -1,0 +1,11 @@
+.DS_Store*
+Battle.net
+Hiarcs
+Roland Cloud
+gh
+github-copilot
+grammarly-languageserver
+iterm2
+nvim/after/syntax
+nvim/plugin
+tmux/plugins/*

@@ -48,7 +48,7 @@ require('lualine').setup {
         {
             'filename',
             path = 3,
-            shorting_target = 40,
+            shorting_target = 70,
         }
     },
     lualine_z = {'branch'}
