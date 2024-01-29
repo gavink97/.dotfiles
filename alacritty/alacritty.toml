@@ -1,5 +1,4 @@
 live_config_reload = true
-
 import = [
     "~/.config/alacritty/themes/everforest_light.toml"
 ]
@@ -13,11 +12,12 @@ style = "Medium"
 
 [font.normal]
 family = "FiraMono Nerd Font"
-style = "Regular"
+style = "Medium"
 
 [window]
 dynamic_padding = true
 decorations = "Buttonless"
+opacity = 0.8
 
 [cursor]
 style = { shape = "Block", blinking = "On" }

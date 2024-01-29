@@ -1,4 +1,4 @@
-" =============================================================================
+" lazy=============================================================================
 " URL: https://github.com/sainnhe/everforest
 " Filename: autoload/everforest.vim
 " Author: sainnhe

@@ -103,6 +103,6 @@ alias vi="nvim"
 alias python="python3"
 alias cat="bat -p"
 
-for file in $HOME/.config/zsh/scripts/*.sh; do
-    source "$file"
-done
+# for file in $HOME/.config/zsh/scripts/*.sh; do
+#     source "$file"
+# done
