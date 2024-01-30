@@ -7,7 +7,6 @@ require("lazy").setup({
     }),
 
     'nvim-tree/nvim-web-devicons',
-    'nvim-treesitter/playground',
     'gavink97/nvim-cursorline',
     'mbbill/undotree',
     'tpope/vim-fugitive',
@@ -61,23 +60,32 @@ require("lazy").setup({
     }),
 
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
+        'neovim/nvim-lspconfig',
         dependencies = {
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},     -- Required
-            {'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
+            {'hrsh7th/cmp-nvim-lsp'},
             {'hrsh7th/cmp-buffer'},
             {'hrsh7th/cmp-path'},
+            {'hrsh7th/cmp-cmdline'},
+            {'hrsh7th/nvim-cmp'},
             {'saadparwaiz1/cmp_luasnip'},
-            {'hrsh7th/cmp-nvim-lua'},
-            {'L3MON4D3/LuaSnip'},     -- Required
-            {'rafamadriz/friendly-snippets'}
+            {"j-hui/fidget.nvim"},
         }
+    },
+
+    {
+        'L3MON4D3/LuaSnip',
+        version = "v2.*",
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" }
+    },
+
+    {
+        "danymat/neogen",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "L3MON4D3/LuaSnip",
+        },
     }
 })

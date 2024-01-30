@@ -1,58 +1,104 @@
-local lsp_zero = require('lsp-zero')
-
-lsp_zero.omnifunc.setup({
-  tabcomplete = true, -- this doesnt really work as good as I want it to
-  use_fallback = true,
-})
-
-lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp_zero.default_keymaps({buffer = bufnr})
-end)
-
-lsp_zero.configure('html', {
-    filetypes = {'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'}
-})
-
---- if you want to know more about lsp-zero and mason.nvim
---- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-
-require('mason').setup({})
+require("fidget").setup({})
+require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'pylsp', 'html', 'tailwindcss', 'cssls'},
-  handlers = {
-    lsp_zero.default_setup,
-    lua_ls = function()
-      local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-    tsserver = function()
-      require('lspconfig').tsserver.setup({
-        single_file_support = false,
-        on_attach = function()
-        end
-      })
-    end,
-  }
+    ensure_installed = {
+        "lua_ls",
+        "rust_analyzer",
+        "tsserver",
+    },
+    handlers = {
+        function (server_name)
+            local cmp_lsp  = require("cmp_nvim_lsp")
+            local capabilities = vim.tbl_deep_extend(
+                "force",
+                {},
+                vim.lsp.protocol.make_client_capabilities(),
+                cmp_lsp.default_capabilities())
+
+            require("lspconfig")[server_name].setup {
+                capabilities = capabilities
+            }
+        end,
+
+        ["lua_ls"] = function ()
+            local lspconfig = require("lspconfig")
+            lspconfig.lua_ls.setup {
+                settings = {
+                    Lua = {
+                        diagnostic = {
+                            globals = { "vim" }
+                        }
+                    }
+                }
+            }
+        end,
+    }
 })
 
-local cmp = require('cmp')
+local cmp = require'cmp'
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
 cmp.setup({
-  sources = {
-    {name = 'path'},
-    {name = 'nvim_lsp'},
-    {name = 'nvim_lua'},
-    {name = 'luasnip', keyword_length = 2},
-    {name = 'buffer', keyword_length = 3},
-  },
-  formatting = lsp_zero.cmp_format(),
-  mapping = cmp.mapping.preset.insert({
-    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-  }),
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    window = {
+        -- completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    }),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+    }, {
+            { name = 'buffer' },
+        })
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    }, {
+            { name = 'buffer' },
+        })
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = 'buffer' }
+    }
+})
+
+vim.diagnostic.config({
+    update_in_insert = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+    },
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+            { name = 'cmdline' }
+        })
 })

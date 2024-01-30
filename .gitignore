@@ -1,11 +1,6 @@
 .DS_Store*
-Battle.net
-Hiarcs
-Roland Cloud
-gh
-github-copilot
-grammarly-languageserver
-iterm2
+.git
+.secret*
 nvim/after/syntax
-nvim/plugin
+nvim/lazy-lock.json
 tmux/plugins/*
