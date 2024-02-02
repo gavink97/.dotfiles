@@ -1,0 +1,22 @@
+---
+- name: apt install
+  become: yes
+  ansible.builtin.apt:
+    name:
+      - git
+      - tmux
+      - alacritty
+      - neovim
+      - bat
+      - fzf
+      - tree
+      - ripgrep
+      - docker
+      - docker-compose
+      - zsh
+      - wget
+      - curl
+      - jq
+      - fd
+    state: latest
+  when: ansible_distribution == "Debian"

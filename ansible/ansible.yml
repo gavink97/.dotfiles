@@ -1,0 +1,46 @@
+---
+- name: Gavin Kondrath Dotfiles
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: brew install
+      ansible.builtin.import_tasks: darwin.yml
+      when: ansible_distribution == "Darwin"
+
+    - name: dnf install
+      ansible.builtin.import_tasks: fedora.yml
+      when: ansible_distribution == "Fedora"
+
+    - name: apt install
+      ansible.builtin.import_tasks: debian.yml
+      when: ansible_distribution == "Debian"
+
+    - name: Make ZSH default shell
+      command: ./files/zsh.sh
+
+    - name: Installing OH MY ZSH
+      command: ./files/ohmyzsh.sh
+
+    - name: Installing Nerd Font
+      command: ./files/nerdfont.sh
+
+    - name: Installing TPM
+      command: ./files/tmux.sh
+
+      # not sure if either of these are possible
+
+    # - name: Install Tmux Plugins
+
+    # - name: Install Neovim Plugins
+
+    - name: decrypt powerline config
+      ansible.builtin.command: ansible-vault decrypt ~/.config/tmux-powerline/config.sh
+      ignore_errors: yes
+
+    - name: decrypt ssh keys
+      ansible.builtin.command:
+        cmd: "ansible-vault decrypt {{ item }}"
+      with_fileglob:
+        - "~/.config/keys/*"
+      ignore_errors: yes

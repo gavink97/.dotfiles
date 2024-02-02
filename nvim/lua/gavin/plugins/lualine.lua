@@ -71,5 +71,3 @@ require('lualine').setup {
     },
     extensions = {'quickfix'}
 }
-
-

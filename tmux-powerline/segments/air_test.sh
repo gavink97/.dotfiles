@@ -110,7 +110,7 @@ __get_us_aqi_score() {
     fi
 
     aqi_value=$(__get_aqi_max "$carbon_monoxide_aqi_value" "$nitrogen_dioxide_aqi_value" "$ozone_aqi_value" "$sulphur_dioxide_aqi_value" "$fine_particle_aqi_value" "$coarse_particulate_aqi_value")
-    IFS=' ' read -r aqi_level aqi_color aqi_symbol <<< "$(__get_aqi_level_color_symbol "$aqi_value")" 
+    IFS=' ' read -r aqi_level aqi_color aqi_symbol <<< "$(__get_aqi_level_color_symbol "$aqi_value")"
     rounded_aqi=$(printf '%.*f\n' 0 "$aqi_value")
 
     # echo "aqi max: $rounded_aqi"
@@ -146,7 +146,7 @@ __get_aqi_max(){
     local n4=$4
     local n5=$5
     local n6=$6
-   
+
     max=$n1
 
     if (( $(echo "$n2 > $max" | bc -l) )); then
@@ -203,7 +203,7 @@ __get_aqi_level_color_symbol(){
         aqi_level="Very Hazardous"
         aqi_color="Brown"
         aqi_symbol="💀"
-    fi 
+    fi
 
     echo $aqi_level $aqi_color $aqi_symbol
 }

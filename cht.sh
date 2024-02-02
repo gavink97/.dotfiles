@@ -11,4 +11,3 @@ if printf $languages | rg -qs $selected; then
 else
     tmux neww bash -c "curl cht.sh/$selected~$query$style & while [ : ]; do sleep 1; done"
 fi
-

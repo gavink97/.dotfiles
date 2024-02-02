@@ -1,0 +1,21 @@
+---
+- name: brew install
+  become: yes
+  community.general.homebrew:
+    name:
+      - git
+      - tmux
+      - alacritty
+      - neovim
+      - bat
+      - fzf
+      - tree
+      - ripgrep
+      - docker
+      - docker-compose
+      - curl
+      - wget
+      - jq
+      - fd
+    state: latest
+  when: ansible_distribution == "Darwin"
