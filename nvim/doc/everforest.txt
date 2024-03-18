@@ -535,7 +535,7 @@ How to use custom colors?~
       " See `colors/everforest.vim` for all predefined highlight groups.
       highlight! link groupA groupB
       highlight! link groupC groupD
-    
+
       " Initialize the color palette.
       " The first parameter is a valid value for `g:everforest_background`,
       " and the second parameter is a valid value for `g:everforest_colors_override`.
@@ -549,12 +549,12 @@ How to use custom colors?~
       " See `autoload/everforest.vim` for the format of `l:palette`.
       call everforest#highlight('groupE', l:palette.red, l:palette.none, 'undercurl', l:palette.red)
     endfunction
-    
+
     augroup EverforestCustom
       autocmd!
       autocmd ColorScheme everforest call s:everforest_custom()
     augroup END
-    
+
     colorscheme everforest
 <
 Note: Make sure to define the `augroup` before declare the `colorscheme`.

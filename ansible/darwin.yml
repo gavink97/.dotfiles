@@ -17,5 +17,6 @@
       - wget
       - jq
       - fd
+      - go
     state: latest
   when: ansible_distribution == "Darwin"

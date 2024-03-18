@@ -22,11 +22,26 @@
     - name: Installing OH MY ZSH
       command: ./files/ohmyzsh.sh
 
-    - name: Installing Nerd Font
-      command: ./files/nerdfont.sh
+      # not production ready
+    # - name: Installing Nerd Font
+      #  command: ./files/nerdfont.sh
 
     - name: Installing TPM
       command: ./files/tmux.sh
+
+    - name: Installing TailwindCSS
+      command: ./files/tailwindcss.sh
+
+    - name: Install Templ
+      command: go install github.com/a-h/templ/cmd/templ@latest
+
+    # install templ binaries
+
+    - name: Install Air
+      command: go install github.com/cosmtrek/air@latest
+
+    - name: Install UV
+      command: curl -LsSf https://astral.sh/uv/install.sh | sh
 
       # not sure if either of these are possible
 
@@ -34,13 +49,5 @@
 
     # - name: Install Neovim Plugins
 
-    - name: decrypt powerline config
-      ansible.builtin.command: ansible-vault decrypt ~/.config/tmux-powerline/config.sh
-      ignore_errors: yes
-
-    - name: decrypt ssh keys
-      ansible.builtin.command:
-        cmd: "ansible-vault decrypt {{ item }}"
-      with_fileglob:
-        - "~/.config/keys/*"
-      ignore_errors: yes
+    # - name: decrypting files
+      #  command: ./files/decrypt.sh

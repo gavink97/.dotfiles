@@ -3,6 +3,10 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export GOPATH="$HOME/go"
+export PATH=$PATH:$GOPATH/bin
+export ARCHPREFERENCE=arm64
+export PATH="/Library/Frameworks/Python.framework/Versions/3.11/bin:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -106,3 +110,8 @@ alias cat="bat -p"
 # for file in $HOME/.config/zsh/scripts/*.sh; do
 #     source "$file"
 # done
+
+# Switch to an arm64e shell by default
+if [ `machine` != arm64e ]; then
+    exec arch -arm64 zsh
+fi

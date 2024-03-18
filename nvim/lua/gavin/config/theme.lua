@@ -8,7 +8,7 @@ if vim.fn.has('termguicolors') then
     vim.o.termguicolors = true
 end
 
-vim.o.background = 'light'
+vim.o.background = 'dark'
 
 vim.g.everforest_background = 'hard'
 vim.g.everforest_better_performance = 1

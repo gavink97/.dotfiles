@@ -1,4 +1,4 @@
-require("fidget").setup({})
+require("fidget").setup()
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
@@ -31,6 +31,34 @@ require('mason-lspconfig').setup({
                     }
                 }
             }
+        end,
+
+        ["html"] = function ()
+            local lspconfig = require("lspconfig")
+            lspconfig.html.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "html", "templ" },
+            })
+        end,
+
+        ["htmx"] = function ()
+            local lspconfig = require("lspconfig")
+            lspconfig.htmx.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "html", "templ" },
+            })
+        end,
+
+        ["tailwindcss"] = function ()
+            local lspconfig = require("lspconfig")
+            lspconfig.tailwindcss.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+                init_options = { userLanguages = { templ = "html" } },
+            })
         end,
     }
 })
@@ -102,3 +130,5 @@ cmp.setup.cmdline(':', {
             { name = 'cmdline' }
         })
 })
+
+vim.filetype.add({ extension = { templ = "templ" } })

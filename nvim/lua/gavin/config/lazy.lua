@@ -7,17 +7,37 @@ require("lazy").setup({
     }),
 
     'nvim-tree/nvim-web-devicons',
-    'gavink97/nvim-cursorline',
+    --'gavink97/nvim-cursorline',
     'mbbill/undotree',
     'tpope/vim-fugitive',
-    "laytan/cloak.nvim",
+    {
+        "laytan/cloak.nvim",
+        dependencies= {
+            {
+                'nvim-telescope/telescope.nvim',
+            },
+        },
+    },
     'm4xshen/autoclose.nvim',
     'christoomey/vim-tmux-navigator',
     'lewis6991/gitsigns.nvim',
+    'mhartington/formatter.nvim',
+    {
+        "epwalsh/obsidian.nvim",
+        version = "*",
+        lazy = true,
+        ft = "markdown",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+            "nvim-telescope/telescope.nvim",
+            "nvim-treesitter/nvim-treesitter"
+        },
+    },
 
     {
         'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
+        branch = 'master',
         dependencies = { {'nvim-lua/plenary.nvim'} }
     },
 
@@ -87,5 +107,6 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter",
             "L3MON4D3/LuaSnip",
         },
-    }
+    },
+
 })
