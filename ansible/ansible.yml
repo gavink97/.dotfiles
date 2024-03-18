@@ -4,6 +4,9 @@
   become: true
 
   tasks:
+    - name: Making symbolic links
+      command: ./files/make_alias.sh
+
     - name: brew install
       ansible.builtin.import_tasks: darwin.yml
       when: ansible_distribution == "Darwin"

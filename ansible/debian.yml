@@ -11,8 +11,8 @@
       - fzf
       - tree
       - ripgrep
-      - docker
-      - docker-compose
+      #- docker
+      #- docker-compose
       - zsh
       - wget
       - curl
