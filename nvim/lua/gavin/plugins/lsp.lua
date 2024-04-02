@@ -5,6 +5,7 @@ require('mason-lspconfig').setup({
         "lua_ls",
         "rust_analyzer",
         "tsserver",
+        "gopls"
     },
     handlers = {
         function (server_name)

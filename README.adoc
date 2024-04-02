@@ -1,0 +1,42 @@
+= Dotfiles
+Gavin Kondrath <78187175+gavink97@users.noreply.github.com>
+v1.0, 2024-04-01
+:toc:
+:homepage: https://github.com/gavink97
+
+== Introduction
+This is a collection of dotfiles for my personal use.
+
+== Getting Started
+
+Place vault key here `~/.ansible-vault/vault.secret`
+
+=== Prerequisites
+
+Supported Operating Systems::
+    MacOS:::
+    Linux:::
+        . Fedora
+        . Ubuntu
+
+Install the following packages:
+....
+gh
+ansible
+....
+
+=== Installation
+....
+gh repo clone gavink97/.dotfiles ~
+cd ~/.dotfiles
+chmod +x ansible/files/*
+ansible-playbook ansible/ansible.yml --ask-become-pass
+ansible/files/decrypt.sh
+....
+
+Manually install tmux / neovim plugins, red hat mono nerd font, docker, templ binaries
+
+== Roadmap
+* [ ] Work on ansible playbooks
+* [ ] Work on docker install script
+* [ ] Automate patching and installing redhat mono

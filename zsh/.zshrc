@@ -101,17 +101,24 @@ export LANG=en_US.UTF-8
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias vi="nvim"
-alias python="python3"
-alias cat="bat -p"
+
+alias "vi"="nvim"
+alias "python"="python3"
+alias "cat"="bat -p"
+alias "cd"="z"
+alias "python -m venv"="uv venv"
+alias "venv"="uv venv"
+alias "pip install"="uv pip install"
+alias "pip freeze"="uv pip freeze | uv pip compile - -o requirements.txt"
+
 
 # for file in $HOME/.config/zsh/scripts/*.sh; do
 #     source "$file"
 # done
 
 # Switch to an arm64e shell by default
-if [ `machine` != arm64e ]; then
-    exec arch -arm64 zsh
+if [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "arm64" ]; then
+    exec /usr/bin/arch -arm64 /bin/zsh
 fi
+
+eval "$(zoxide init zsh)"

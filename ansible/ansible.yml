@@ -19,6 +19,16 @@
       ansible.builtin.import_tasks: debian.yml
       when: ansible_distribution == "Debian"
 
+    - name: Install zoxide (debian only)
+      command: curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+      when: ansible_distribution == "Debian"
+
+    - name: Install nvm
+      command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+    - name: Install Rust and Cargo
+      command: curl https://sh.rustup.rs -sSf | sh
+
     - name: Make ZSH default shell
       command: ./files/zsh.sh
 

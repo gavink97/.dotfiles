@@ -19,5 +19,6 @@
       - jq
       - fd-find
       - golang
+      - zoxide
     state: latest
   when: ansible_distribution == "Fedora"

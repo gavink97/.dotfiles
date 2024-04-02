@@ -18,5 +18,6 @@
       - jq
       - fd
       - go
+      - zoxide
     state: latest
   when: ansible_distribution == "Darwin"

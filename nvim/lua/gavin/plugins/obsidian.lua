@@ -2,7 +2,7 @@ require("obsidian").setup({
   workspaces = {
     {
       name = "notes",
-      path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes",
+      path = "~/Notes",
       overrides = {
         notes_subdir = "notes",
       },

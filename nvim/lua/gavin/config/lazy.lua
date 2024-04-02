@@ -10,18 +10,22 @@ require("lazy").setup({
     --'gavink97/nvim-cursorline',
     'mbbill/undotree',
     'tpope/vim-fugitive',
-    {
-        "laytan/cloak.nvim",
-        dependencies= {
-            {
-                'nvim-telescope/telescope.nvim',
-            },
-        },
-    },
+    'ThePrimeagen/vim-be-good',
     'm4xshen/autoclose.nvim',
     'christoomey/vim-tmux-navigator',
     'lewis6991/gitsigns.nvim',
     'mhartington/formatter.nvim',
+
+    {
+        'Exafunction/codeium.vim',
+        event = 'BufEnter'
+    },
+
+    {
+        "laytan/cloak.nvim",
+        dependencies= {'nvim-telescope/telescope.nvim'},
+    },
+
     {
         "epwalsh/obsidian.nvim",
         version = "*",
@@ -78,6 +82,13 @@ require("lazy").setup({
         "iamcco/markdown-preview.nvim",
         build = function() vim.fn["mkdp#util#install"]() end,
     }),
+
+    {
+        'tigion/nvim-asciidoc-preview',
+        cmd = { 'AsciiDocPreview' },
+        ft = { 'asciidoc' },
+        build = 'cd server && npm install',
+    },
 
     {
         'neovim/nvim-lspconfig',
