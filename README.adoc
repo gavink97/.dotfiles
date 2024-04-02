@@ -13,30 +13,34 @@ Place vault key here `~/.ansible-vault/vault.secret`
 
 === Prerequisites
 
+Macbook with Apple Silicon
+
 Supported Operating Systems::
     MacOS:::
     Linux:::
-        . Fedora
-        . Ubuntu
+        . Fedora Asahi Remix
+        . Ubuntu (Untested)
 
 Install the following packages:
 ....
 gh
 ansible
+ansible-galaxy collection install community.general
 ....
 
 === Installation
 ....
-gh repo clone gavink97/.dotfiles ~
+gh repo clone gavink97/.dotfiles ~/.dotfiles
 cd ~/.dotfiles
 chmod +x ansible/files/*
 ansible-playbook ansible/ansible.yml --ask-become-pass
 ansible/files/decrypt.sh
 ....
 
-Manually install tmux / neovim plugins, red hat mono nerd font, docker, templ binaries
+Manually install tmux, tpm, neovim plugins, fonts, docker, tailwind
 
 == Roadmap
-* [ ] Work on ansible playbooks
-* [ ] Work on docker install script
+* [ ] Improve playbooks
+* [ ] Install Docker
 * [ ] Automate patching and installing redhat mono
+* [ ] NixOS Maybe

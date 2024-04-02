@@ -20,4 +20,18 @@
       - fd-find
       - golang
     state: latest
-  when: ansible_distribution == "Debian"
+
+- name: Get zoxide latest
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh"
+    dest: "/tmp/install_zoxide.sh"
+    mode: "0755"
+  register: zoxide_download
+
+- name: Install zoxide
+  ansible.builtin.shell:
+    cmd: "/tmp/install_zoxide.sh"
+  args:
+    creates: "{{ zoxide_download.dest }}"
+  when: zoxide_download.changed
+  become: yes

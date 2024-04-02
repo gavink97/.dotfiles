@@ -111,6 +111,10 @@ alias "venv"="uv venv"
 alias "pip install"="uv pip install"
 alias "pip freeze"="uv pip freeze | uv pip compile - -o requirements.txt"
 
+if [ "$(uname)" != "Darwin" ]; then
+    alias "tailwindcss"="/opt/tailwindcss"
+    export PATH=$PATH:/opt/go/bin
+fi
 
 # for file in $HOME/.config/zsh/scripts/*.sh; do
 #     source "$file"
@@ -122,3 +126,8 @@ if [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "arm64" ]; then
 fi
 
 eval "$(zoxide init zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"

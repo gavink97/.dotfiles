@@ -4,8 +4,33 @@
   become: true
 
   tasks:
-    - name: Making symbolic links
-      command: ./files/make_alias.sh
+    - name: Create symbolic links
+      vars:
+        home_dir: "{{ lookup('env', 'HOME') }}"
+        config_dir: "{{ home_dir }}/.config"
+        files_to_link:
+          - src: "{{ home_dir }}/.dotfiles/.gitconfig"
+            dest: "{{ home_dir }}/.gitconfig"
+          - src: "{{ home_dir }}/.dotfiles/alacritty"
+            dest: "{{ config_dir }}"
+          - src: "{{ home_dir }}/.dotfiles/cht.sh"
+            dest: "{{ config_dir }}"
+          - src: "{{ home_dir }}/.dotfiles/keys"
+            dest: "{{ config_dir }}"
+          - src: "{{ home_dir }}/.dotfiles/nvim"
+            dest: "{{ config_dir }}"
+          - src: "{{ home_dir }}/.dotfiles/tmux"
+            dest: "{{ config_dir }}"
+          - src: "{{ home_dir }}/.dotfiles/tmux-powerline"
+            dest: "{{ config_dir }}"
+          - src: "{{ home_dir }}/.dotfiles/zsh/.zshrc"
+            dest: "{{ home_dir }}/.zshrc"
+          - src: "{{ home_dir }}/.dotfiles/.obsidian"
+            dest: "{{ home_dir }}/Notes"
+      command:
+        cmd: ln -s -f "{{ item.src }}" "{{ item.dest }}"
+      loop: "{{ files_to_link }}"
+      become: true
 
     - name: brew install
       ansible.builtin.import_tasks: darwin.yml
@@ -19,47 +44,89 @@
       ansible.builtin.import_tasks: debian.yml
       when: ansible_distribution == "Debian"
 
-    - name: Install zoxide (debian only)
-      command: curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
-      when: ansible_distribution == "Debian"
+    - name: Get nvm latest
+      ansible.builtin.get_url:
+        url: "https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh"
+        dest: "/tmp/install_nvm.sh"
+        mode: "0755"
+      register: nvm_download
 
     - name: Install nvm
-      command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+      ansible.builtin.shell:
+        cmd: "/tmp/install_nvm.sh"
+      args:
+        creates: "{{ nvm_download.dest }}"
+      when: nvm_download.changed
+      become: yes
 
-    - name: Install Rust and Cargo
-      command: curl https://sh.rustup.rs -sSf | sh
+    - name: Get Rust latest
+      ansible.builtin.get_url:
+        url: "https://sh.rustup.rs"
+        dest: "/tmp/rustup-init.sh"
+        mode: "0755"
+      register: rust_download
+
+    - name: Install Rust
+      ansible.builtin.shell:
+        cmd: "/tmp/rustup-init.sh"
+      args:
+        creates: "{{ rust_download.dest }}"
+      when: rust_download.changed
+      become: yes
 
     - name: Make ZSH default shell
-      command: ./files/zsh.sh
+      ansible.builtin.shell:
+        cmd: ./files/zsh.sh
 
     - name: Installing OH MY ZSH
-      command: ./files/ohmyzsh.sh
+      ansible.builtin.shell:
+        cmd: ./files/ohmyzsh.sh
 
-      # not production ready
-    # - name: Installing Nerd Font
-      #  command: ./files/nerdfont.sh
+        # install fonts, yq
 
-    - name: Installing TPM
-      command: ./files/tmux.sh
+    # - name: Installing TPM
+      #   ansible.builtin.shell:
+        #     cmd: ./files/tmux.sh
 
-    - name: Installing TailwindCSS
-      command: ./files/tailwindcss.sh
+    # - name: Installing TailwindCSS
+      #   ansible.builtin.shell:
+        #   cmd: ./files/tailwindcss.sh
+
 
     - name: Install Templ
-      command: go install github.com/a-h/templ/cmd/templ@latest
-
-    # install templ binaries
+      ansible.builtin.shell:
+        cmd: |
+          export PATH=$PATH:/opt/go/bin
+          go install github.com/a-h/templ/cmd/templ@latest
+      environment:
+        PATH: "{{ lookup('env', 'PATH') }}:/opt/go/bin"
+      become: yes
 
     - name: Install Air
-      command: go install github.com/cosmtrek/air@latest
+      ansible.builtin.shell:
+        cmd: |
+          export PATH=$PATH:/opt/go/bin
+          go install github.com/cosmtrek/air@latest
+      environment:
+        PATH: "{{ lookup('env', 'PATH') }}:/opt/go/bin"
+      become: yes
+
+    - name: Get UV latest
+      ansible.builtin.get_url:
+        url: "https://astral.sh/uv/install.sh"
+        dest: "/tmp/install_uv.sh"
+        mode: "0755"
+      register: uv_download
 
     - name: Install UV
-      command: curl -LsSf https://astral.sh/uv/install.sh | sh
-
-      # not sure if either of these are possible
+      ansible.builtin.shell:
+        cmd: "/tmp/install_uv.sh"
+      args:
+        creates: "{{ uv_download.dest }}"
+      when: uv_download.changed
+      become: yes
 
     # - name: Install Tmux Plugins
-
     # - name: Install Neovim Plugins
 
     # - name: decrypting files
