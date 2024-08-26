@@ -16,10 +16,10 @@ require("lazy").setup({
     'lewis6991/gitsigns.nvim',
     'mhartington/formatter.nvim',
 
-    {
-        'Exafunction/codeium.vim',
-        event = 'BufEnter'
-    },
+    -- {
+    --    'Exafunction/codeium.vim',
+    --    event = 'BufEnter'
+    -- },
 
     {
         "laytan/cloak.nvim",
@@ -51,14 +51,11 @@ require("lazy").setup({
         dependencies = { {"nvim-lua/plenary.nvim"} }
     },
 
-    ({
-        'folke/trouble.nvim',
-        config = function()
-            require("trouble").setup {
-                --icons = false,
-            }
-        end
-    }),
+    {
+        "folke/trouble.nvim",
+        opts = {},
+        cmd = "Trouble"
+    },
 
     {
         'nvim-treesitter/nvim-treesitter',

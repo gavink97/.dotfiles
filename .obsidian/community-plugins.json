@@ -1,5 +1,7 @@
 [
   "obsidian-kanban",
-  "obsidian-full-calendar",
-  "obsidian-zotero-desktop-connector"
+  "obsidian-zotero-desktop-connector",
+  "calendar",
+  "obsidian-git",
+  "obsidian-wordpress"
 ]

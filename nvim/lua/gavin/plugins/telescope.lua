@@ -1,9 +1,18 @@
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>vm', builtin.man_pages, {})
 vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
+
+vim.keymap.set('n', '<leader>pf', function()
+    builtin.find_files({
+        find_command = {
+            'fd',
+            '--type', 'file',
+            '--exclude', '*_templ.go',
+        }
+    })
+end, {})
 
 vim.keymap.set('n', '<leader>ph', function()
     builtin.find_files({
@@ -13,7 +22,9 @@ vim.keymap.set('n', '<leader>ph', function()
             '--hidden',
             '--exclude', 'node_modules',
             '--exclude', 'site-packages',
-            '--exclude', '.git'
+            '--exclude', '.git',
+            '--exclude', '*_templ.go',
+            '--exclude', '.DS_Store'
         },
         no_ignore = true,
         no_ignore_parent = true

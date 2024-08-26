@@ -106,10 +106,6 @@ alias "vi"="nvim"
 alias "python"="python3"
 alias "cat"="bat -p"
 alias "cd"="z"
-alias "python -m venv"="uv venv"
-alias "venv"="uv venv"
-alias "pip install"="uv pip install"
-alias "pip freeze"="uv pip freeze | uv pip compile - -o requirements.txt"
 
 if [ "$(uname)" != "Darwin" ]; then
     alias "tailwindcss"="/opt/tailwindcss"

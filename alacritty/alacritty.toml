@@ -4,8 +4,8 @@ import = [
 ]
 
 [font]
-size = 9.0
-# size = 12.0
+# size = 9.0
+size = 12.0
 
 # [font.bold]
 # family = "FiraMono Nerd Font"
@@ -26,10 +26,10 @@ style = "Medium"
 
 [window]
 dynamic_padding = true
-decorations = "None"
-# decorations = "Buttonless"
-opacity = 0.83
-# opacity = 0.75
+# decorations = "None"
+decorations = "Buttonless"
+# opacity = 0.83
+opacity = 0.75
 
 
 [cursor]

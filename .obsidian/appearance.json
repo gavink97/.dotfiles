@@ -1,6 +1,4 @@
 {
-  "accentColor": "#ff944d",
-  "theme": "moonstone",
-  "nativeMenus": true,
-  "translucency": false
+  "accentColor": "#ff9742",
+  "monospaceFontFamily": "RedHatMono Nerd Font"
 }

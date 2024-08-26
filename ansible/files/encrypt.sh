@@ -1,7 +1,6 @@
 #!/bin/bash
 
 VAULT_PASSWORD_FILE=~/.ansible-vault/vault.secret
-KEYS_DIRECTORY=~/.config/keys
 TMUX_POWERLINE_CONFIG=~/.config/tmux-powerline/config.sh
 
 if [ -f "$TMUX_POWERLINE_CONFIG" ]; then
