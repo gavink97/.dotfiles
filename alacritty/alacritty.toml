@@ -6,6 +6,7 @@ import = [
 [font]
 # size = 9.0
 size = 12.0
+glyph_offset = { x = 0, y = -1 }
 
 # [font.bold]
 # family = "FiraMono Nerd Font"
@@ -19,7 +20,6 @@ size = 12.0
 family = "RedHatMono Nerd Font"
 style = "Regular"
 
-
 [font.bold]
 family = "RedHatMono Nerd Font"
 style = "Medium"
@@ -30,6 +30,7 @@ dynamic_padding = true
 decorations = "Buttonless"
 # opacity = 0.83
 opacity = 0.75
+blur = false
 
 
 [cursor]
