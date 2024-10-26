@@ -1,37 +1,31 @@
-live_config_reload = true
-import = [
-    "~/.config/alacritty/themes/everforest_dark.toml"
-]
 
 [font]
 # size = 9.0
 size = 12.0
-glyph_offset = { x = 0, y = -1 }
-
-# [font.bold]
-# family = "FiraMono Nerd Font"
-# style = "Medium"
-
-# [font.normal]
-# family = "FiraMono Nerd Font"
-# style = "Medium"
+glyph_offset = { x = 0, y = 0 }
 
 [font.normal]
-family = "RedHatMono Nerd Font"
-style = "Regular"
+family = "JuliaMono Nerd Font"
+style = "Light"
 
 [font.bold]
-family = "RedHatMono Nerd Font"
-style = "Medium"
+family = "JuliaMono Nerd Font"
+style = "SemiBold"
 
 [window]
 dynamic_padding = true
 # decorations = "None"
 decorations = "Buttonless"
 # opacity = 0.83
-opacity = 0.75
+opacity = 0.8
 blur = false
 
 
 [cursor]
 style = { shape = "Block", blinking = "On" }
+
+[general]
+live_config_reload = true
+import = [
+    "~/.config/alacritty/themes/everforest_dark.toml"
+]

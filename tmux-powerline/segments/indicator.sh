@@ -4,9 +4,9 @@ prefix_mode_text="WAIT"
 copy_mode_text="COPY"
 sync_mode_text="SYNC"
 
-#everforest hard light theme
-default_bg="#f2efe1"
-default_fg="#fefbf0"
+#everforest soft dark theme
+default_bg="#3c464b"
+default_fg="#d3c6aa"
 
 prefix_mode_fg="#fefbf0"
 prefix_mode_bg="#f85552" # red

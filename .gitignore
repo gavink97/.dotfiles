@@ -6,3 +6,5 @@ nvim/lazy-lock.json
 tmux/plugins/*
 .obsidian/plugins
 .obsidian/workspace.json
+package-lock.json
+node_modules
