@@ -40,7 +40,5 @@ ansible/files/decrypt.sh
 Manually install tmux, tpm, neovim plugins, fonts, docker, tailwind
 
 == Roadmap
-* [ ] Improve playbooks
-* [ ] Install Docker
-* [ ] Automate patching and installing redhat mono
-* [ ] NixOS Maybe
+* [ ] Move to using python over bash
+* [ ] NixOS

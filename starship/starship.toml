@@ -10,6 +10,17 @@ success_symbol = '[](bold green) '
 # 
 error_symbol = '[](bold red) '
 
-# Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
+
+[direnv]
+disabled = false
+symbol = ' '
+
+[ruby]
+disabled = true
+
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = '%H:%M'

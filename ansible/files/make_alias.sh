@@ -1,6 +1,7 @@
 #!/bin/bash
 ln -s "$HOME"/.dotfiles/.gitconfig "$HOME"/.gitconfig
 ln -s "$HOME"/.dotfiles/alacritty "$HOME"/.config/alacritty
+ln -s "$HOME"/.dotfiles/sketchybar "$HOME"/.config/sketchybar
 ln -s "$HOME"/.dotfiles/cht.sh "$HOME"/.config/cht.sh
 ln -s "$HOME"/.dotfiles/keys "$HOME"/.config/keys
 ln -s "$HOME"/.dotfiles/nvim "$HOME"/.config/nvim

@@ -45,7 +45,6 @@ require("lazy").setup({
 
 	{
 		"folke/trouble.nvim",
-		opts = {},
 		cmd = "Trouble",
 	},
 
@@ -118,4 +117,11 @@ require("lazy").setup({
 			"L3MON4D3/LuaSnip",
 		},
 	},
+	{
+		"barrett-ruth/import-cost.nvim",
+		build = "sh install.sh npm",
+		config = true,
+	},
+	"nosduco/remote-sshfs.nvim",
+	dependencies = { "nvim-telescope/telescope.nvim" },
 })

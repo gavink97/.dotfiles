@@ -12,7 +12,7 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+#after-startup-command = ['exec-and-forget sketchybar']
 
 # Start AeroSpace at login
 start-at-login = true
@@ -44,6 +44,10 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
+#exec-on-workspace-change = [
+#    '/Users/gavinkondrath/.dotfiles/aerospace/on-ws-change.sh'
+#]
+
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
 # - Constant:     gaps.outer.top = 8
@@ -66,13 +70,13 @@ outer.right =      10
 
 # All possible keys:
 # - Letters.        a, b, c, ..., z
-# - Numbers.        0, 1, 2, ..., 9
+# - Numbers.        0, 1, 2, ..., 9˙˙∆˚
 # - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
 # - F-keys.         f1, f2, ..., f20
 # - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
 #                   leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
 # - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
-#                   keypadMinus, keypadMultiply, keypadPlus
+#                   keypadMinus, keypadMultiply, keypadPflus
 # - Arrows.         left, down, up, right
 
 # All possible modifiers: cmd, alt, ctrl, shift
@@ -118,6 +122,7 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -129,6 +134,7 @@ alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -151,3 +157,23 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+down = 'volume down'
+up = 'volume up'
+shift-down = ['volume set 0', 'mode main']
+
+#[[on-window-detected]]
+#    if.app-name-regex-substring = 'zen'
+#    if.window-title-regex-substring = 'picture-in-picture'
+#    check-further-callbacks = true
+#    run = ['layout floating']
+#
+#[[on-window-detected]]
+#    if.app-name-regex-substring = 'LICEcap'
+#    check-further-callbacks = true
+#    run = 'layout floating'
+#
+#[[on-window-detected]]
+#    if.app-name-regex-substring = 'IINA'
+#    check-further-callbacks = true
+#    run = 'layout floating'

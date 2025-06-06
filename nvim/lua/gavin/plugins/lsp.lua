@@ -27,8 +27,16 @@ require("mason-lspconfig").setup({
 			lspconfig.lua_ls.setup({
 				settings = {
 					Lua = {
-						diagnostic = {
-							globals = { "vim" },
+						runtime = {
+							version = "LuaJIT",
+						},
+						diagnostics = {
+							globals = {
+								"vim",
+								"on_attach",
+								"capabilities",
+								"opts",
+							},
 						},
 					},
 				},
@@ -58,12 +66,14 @@ require("mason-lspconfig").setup({
 			lspconfig.tailwindcss.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
-				filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+				filetypes = { "templ", "astro", "javascript", "typescript", "react", "typescriptreact" },
 				init_options = { userLanguages = { templ = "html" } },
 			})
 		end,
 	},
 })
+
+vim.filetype.add({ extension = { templ = "templ" } })
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -113,6 +123,7 @@ cmp.setup.cmdline({ "/", "?" }, {
 
 vim.diagnostic.config({
 	update_in_insert = true,
+	virtual_text = true,
 	float = {
 		focusable = false,
 		style = "minimal",
@@ -132,5 +143,3 @@ cmp.setup.cmdline(":", {
 		{ name = "cmdline" },
 	}),
 })
-
-vim.filetype.add({ extension = { templ = "templ" } })

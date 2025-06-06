@@ -51,6 +51,7 @@ fi
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
 
 lazy_load_nvm() {
   unset -f npm node nvm
