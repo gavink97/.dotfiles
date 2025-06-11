@@ -34,11 +34,12 @@ gh repo clone gavink97/.dotfiles ~/.dotfiles
 cd ~/.dotfiles
 chmod +x ansible/files/*
 ansible-playbook ansible/ansible.yml --ask-become-pass
-ansible/files/decrypt.sh
+python3 ansible/files/encrypt.py -d
 ....
 
 Manually install tmux, tpm, neovim plugins, fonts, docker, tailwind
 
 == Roadmap
 * [ ] Move to using python over bash
-* [ ] NixOS
+* [ ] Update Ansible playbooks
+* [x] NixOS

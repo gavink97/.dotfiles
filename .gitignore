@@ -8,3 +8,4 @@ tmux/plugins/*
 .obsidian/workspace.json
 package-lock.json
 node_modules
+tmux/tpm
