@@ -14,6 +14,10 @@ def _command_(origin, target: string) -> None:
         cmd = sp.run(['ln', '-s', origin, target], capture_output=True)
         return (cmd.stderr).decode("utf-8").lower()
 
+    if os.path.lexists(target):
+        print(f"'{target}' already exists.")
+        return
+
     result = _make_alias(origin, target)
 
     if "file exists" in result:
@@ -43,7 +47,7 @@ def _command_(origin, target: string) -> None:
 def _check_macos() -> bool:
     cmd = sp.run(['uname', '-s'], capture_output=True)
     result = (cmd.stdout).decode("utf-8").lower()
-    
+
     if "darwin" in result:
         return True
 
@@ -70,7 +74,7 @@ def main() -> None:
         },
         "alacritty_themes": {
             "origin": f"{DOTFILES}/alacritty/themes",
-            "target": f"{XDG_CONFIG_HOME}/alacritty",
+            "target": f"{XDG_CONFIG_HOME}/alacritty/themes",
         },
         "cheat_sheet": {
             "origin": f"{DOTFILES}/cht.sh",
@@ -82,11 +86,7 @@ def main() -> None:
         },
         "keys": {
             "origin": f"{DOTFILES}/keys",
-            "target": f"{XDG_CONFIG_HOME}",
-        },
-        "neovim": {
-            "origin": f"{DOTFILES}/nvim",
-            "target": f"{XDG_CONFIG_HOME}",
+            "target": f"{XDG_CONFIG_HOME}/keys",
         },
         "ssh_config": {
             "origin": f"{DOTFILES}/ssh/config",
@@ -106,7 +106,7 @@ def main() -> None:
         },
         "tmux_powerline": {
             "origin": f"{DOTFILES}/tmux-powerline",
-            "target": f"{XDG_CONFIG_HOME}",
+            "target": f"{XDG_CONFIG_HOME}/tmux-powerline",
         },
         "zshrc": {
             "origin": f"{DOTFILES}/zsh/{system}/.zshrc",
@@ -118,23 +118,40 @@ def main() -> None:
         aerospace = {
             "origin": f"{DOTFILES}/aerospace",
             "target": f"{XDG_CONFIG_HOME}/aerospace"
-        }
+        },
+        neovim =  {
+            "origin": f"{DOTFILES}/nvim/{system}",
+            "target": f"{XDG_CONFIG_HOME}/nvim",
+        },
 
         files["aerospace"] = hypr
+        files["neovim"] = hypr
 
     else:
+        eww = {
+            "origin": f"{DOTFILES}/eww",
+            "target": f"{XDG_CONFIG_HOME}/eww"
+        }
+
         hypr = {
             "origin": f"{DOTFILES}/hypr",
-            "target": f"{XDG_CONFIG_HOME}"
+            "target": f"{XDG_CONFIG_HOME}/hypr"
         }
 
         waybar = {
             "origin": f"{DOTFILES}/waybar",
-            "target": f"{XDG_CONFIG_HOME}"
+            "target": f"{XDG_CONFIG_HOME}/waybar"
         }
 
+        rofi = {
+            "origin": f"{DOTFILES}/rofi",
+            "target": f"{XDG_CONFIG_HOME}/rofi"
+        }
+
+        files["eww"] = eww
         files["hyprland"] = hypr
         files["waybar"] = waybar
+        files["rofi"] = rofi
 
     for file in files:
         origin = files[file]["origin"]

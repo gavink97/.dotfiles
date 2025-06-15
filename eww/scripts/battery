@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function check_limit {
+    cat /sys/class/power_supply/macsmc-battery/charge_control_end_threshold
+}
+
+check_limit

@@ -32,6 +32,8 @@ def _check_error(error: OSError) -> None:
 def _args() -> string:
     parser = argparse.ArgumentParser()
 
+    # make option to remove ~/.ssh/config on encrypt
+    # or add to precommit
     parser.add_argument(
         "-d",
         "--decrypt",
