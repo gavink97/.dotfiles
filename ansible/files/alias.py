@@ -138,6 +138,11 @@ def main() -> None:
             "target": f"{XDG_CONFIG_HOME}/hypr"
         }
 
+        swaync = {
+            "origin": f"{DOTFILES}/swaync",
+            "target": f"{XDG_CONFIG_HOME}/swaync"
+        }
+
         waybar = {
             "origin": f"{DOTFILES}/waybar",
             "target": f"{XDG_CONFIG_HOME}/waybar"
@@ -150,6 +155,7 @@ def main() -> None:
 
         files["eww"] = eww
         files["hyprland"] = hypr
+        files["swaync"] = swaync
         files["waybar"] = waybar
         files["rofi"] = rofi
 
