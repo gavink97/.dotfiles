@@ -60,6 +60,7 @@ window#waybar.empty #window {
 #network,
 #cpu,
 #memory,
+#custom-notification,
 #custom-power {
   background-color: #101010;
   padding: 0.5rem 1rem;
@@ -73,9 +74,8 @@ window#waybar.empty #window {
 
 #clock {
   color: #8caaee;
-  border-radius: 5px;
-  margin-right: 1rem;
-  margin-left: 1rem;
+  border-radius: 5px 0px 0px 5px;
+  margin-left: 0;
 }
 
 #battery {
@@ -112,7 +112,14 @@ window#waybar.empty #window {
   color: #e78284;
 }
 
+#custom-notification {
+  margin-right: 1rem;
+   padding-right: 1.25rem;
+  border-radius: 5px;
+}
+
 #tray {
+  margin-left: 1rem;
   margin-right: 1rem;
   border-radius: 5px;
 }

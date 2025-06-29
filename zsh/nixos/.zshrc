@@ -28,6 +28,8 @@ export PATH=$PATH:$GOPATH/bin
 # export ARCHFLAGS="-arch x86_64"
 #
 # setopt auto_cd
+#
+unset SSH_ASKPASS
 
 alias "vi"="nvim"
 alias "python"="python3"

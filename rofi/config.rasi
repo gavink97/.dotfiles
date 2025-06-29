@@ -4,7 +4,7 @@ configuration{
       cycle: false;
       font: "FiraMonoNerdFont";
       show-icons: true;
-      icon-theme: "dracula";
+      icon-theme: "MoreWaita";
       terminal: "alacritty";
       drun-display-format: "{icon} {name}";
       location: 0;
@@ -26,8 +26,8 @@ configuration{
     }
 
     window {
-      height: 600px;
-      width: 800px;
+      height: 30%;
+      width: 30%;
       border: 2px;
       border-color: @border-col;
       background-color: @bg-col;
