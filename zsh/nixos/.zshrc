@@ -60,4 +60,4 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
-fastfetch
+#fastfetch

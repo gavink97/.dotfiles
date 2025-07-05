@@ -1,33 +1,33 @@
 * {
-    font-family: FiraMonoNerdFont;
-    font-size: 20px;
-    padding-left: 2px;
-    padding-right: 2px;
-    }
+  font-family: FiraMonoNerdFont;
+  font-size: 20px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
 
 #waybar {
-    background: transparent;
-    color: #c6d0f5;
-    margin: 2px 2px;
+  background: transparent;
+  color: #c6d0f5;
+  margin: 2px 2px;
 }
 
 #window {
-    border-radius: 5px;
-    margin: 5px;
-    background: #101010;
-    padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 5px;
+  background: #101010;
+  padding: 0.5rem 1rem;
 }
 
 window#waybar.empty #window {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 #language {
-    border-radius: 5px;
-    margin: 2px;
-    background: #101010;
-    margin-left: 1rem;
-    padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 2px;
+  background: #101010;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 #workspaces {
@@ -74,8 +74,9 @@ window#waybar.empty #window {
 
 #clock {
   color: #8caaee;
-  border-radius: 5px 0px 0px 5px;
-  margin-left: 0;
+  border-radius: 5px;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 #battery {
@@ -114,12 +115,11 @@ window#waybar.empty #window {
 
 #custom-notification {
   margin-right: 1rem;
-   padding-right: 1.25rem;
+  padding-right: 1.25rem;
   border-radius: 5px;
 }
 
 #tray {
-  margin-left: 1rem;
   margin-right: 1rem;
   border-radius: 5px;
 }

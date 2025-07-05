@@ -14,10 +14,10 @@
 	"modules-right": [
 		//"keyboard-state",
 		//"hyprland/language",
-		//"pulseaudio",
+		"pulseaudio",
 		//"backlight",
-		"clock",
 		"battery",
+		"clock",
 		"tray",
 		"custom/notification",
 		"custom/power"
