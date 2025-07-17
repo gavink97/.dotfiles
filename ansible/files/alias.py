@@ -34,7 +34,8 @@ def _command_(origin, target: string) -> None:
             except FileExistsError:
                 print(f"Directory '{directory_name}' already exists.")
             except PermissionError:
-                print(f"Permission denied: Unable to create '{directory_name}'.")
+                print(
+                    f"Permission denied: Unable to create '{directory_name}'.")
             except Exception as e:
                 print(f"An error occurred: {e}")
         else:
@@ -123,18 +124,20 @@ def main() -> None:
             "origin": f"{DOTFILES}/aerospace",
             "target": f"{XDG_CONFIG_HOME}/aerospace"
         },
-        neovim =  {
+        neovim = {
             "origin": f"{DOTFILES}/nvim/{system}",
             "target": f"{XDG_CONFIG_HOME}/nvim",
         },
 
-        files["aerospace"] = hypr
-        files["neovim"] = hypr
+        files["aerospace"] = aerospace
+        files["neovim"] = neovim
 
     else:
-        eww = {
-            "origin": f"{DOTFILES}/eww",
-            "target": f"{XDG_CONFIG_HOME}/eww"
+        eww = {"origin": f"{DOTFILES}/eww", "target": f"{XDG_CONFIG_HOME}/eww"}
+
+        gsk = {
+            "origin": f"{DOTFILES}/environment.d/gsk.conf",
+            "target": f"{XDG_CONFIG_HOME}/environment.d/gsk.conf",
         }
 
         hypr = {
@@ -142,9 +145,19 @@ def main() -> None:
             "target": f"{XDG_CONFIG_HOME}/hypr"
         }
 
+        stylelint = {
+            "origin": f"{DOTFILES}/.stylelintrc",
+            "target": f"{HOME}/.stylelintrc",
+        }
+
         swaync = {
             "origin": f"{DOTFILES}/swaync",
             "target": f"{XDG_CONFIG_HOME}/swaync"
+        }
+
+        swayosd = {
+            "origin": f"{DOTFILES}/swayosd",
+            "target": f"{XDG_CONFIG_HOME}/swayosd"
         }
 
         waybar = {
@@ -158,8 +171,11 @@ def main() -> None:
         }
 
         files["eww"] = eww
+        files["gsk"] = gsk
         files["hyprland"] = hypr
+        files["stylelint"] = stylelint
         files["swaync"] = swaync
+        files["swayosd"] = swayosd
         files["waybar"] = waybar
         files["rofi"] = rofi
 
@@ -167,6 +183,7 @@ def main() -> None:
         origin = files[file]["origin"]
         target = files[file]["target"]
         _command_(origin, target)
+
 
 if __name__ == '__main__':
     main()
