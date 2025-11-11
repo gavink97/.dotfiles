@@ -123,11 +123,12 @@ def main() -> None:
         aerospace = {
             "origin": f"{DOTFILES}/aerospace",
             "target": f"{XDG_CONFIG_HOME}/aerospace"
-        },
+        }
+
         neovim = {
-            "origin": f"{DOTFILES}/nvim/{system}",
+            "origin": f"{DOTFILES}/nvim",
             "target": f"{XDG_CONFIG_HOME}/nvim",
-        },
+        }
 
         files["aerospace"] = aerospace
         files["neovim"] = neovim

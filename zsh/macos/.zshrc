@@ -2,6 +2,7 @@ export LANG=en_US.UTF-8
 export ARCHPREFERENCE=arm64
 
 export GOPATH=$HOME/go
+export CARGO_HOME=$HOME/cargo
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_EMULATOR_HOME=$HOME/.android/avd
 
