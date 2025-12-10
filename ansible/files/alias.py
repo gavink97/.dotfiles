@@ -85,6 +85,10 @@ def main() -> None:
             "origin": f"{DOTFILES}/fastfetch",
             "target": f"{XDG_CONFIG_HOME}/fastfetch",
         },
+        "ghostty": {
+            "origin": f"{DOTFILES}/ghostty",
+            "target": f"{XDG_CONFIG_HOME}/ghostty",
+        },
         "git_config": {
             "origin": f"{DOTFILES}/.gitconfig",
             "target": f"{HOME}/.gitconfig",

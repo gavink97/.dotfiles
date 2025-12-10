@@ -74,5 +74,3 @@ nvm() {
   lazy_load_nvm
   nvm $@
 }
-
-neofetch

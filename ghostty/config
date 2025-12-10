@@ -1,0 +1,16 @@
+font-family = "JuliaMono Nerd Font"
+font-size = 11
+
+cursor-style = block
+cursor-style-blink = true
+
+theme = everforest
+background-opacity = 0.8
+background-blur = true
+
+title = " "
+#window-decoration = none
+macos-titlebar-style = hidden
+window-padding-balance = true
+
+confirm-close-surface = false

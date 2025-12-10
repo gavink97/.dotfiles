@@ -7,12 +7,14 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.smartindent = true
 vim.o.wrap = false
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "number"
 vim.o.swapfile = false
+vim.o.fen = false
 vim.o.undofile = true
 vim.o.incsearch = true
 vim.o.winborder = "rounded"
 vim.o.clipboard = "unnamedplus"
+vim.o.spell = true
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>")
@@ -28,6 +30,7 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/3rd/image.nvim" },
 })
 
 vim.o.colorcolumn = "80"
@@ -41,13 +44,58 @@ vim.g.everforest_enable_italic = 0
 vim.g.everforest_diagnostic_virtual_text = "grey"
 vim.cmd("colorscheme everforest")
 
+local telescope = require("telescope")
+local ignore = { "node_modules", ".git", ".venv", "*_templ.go", "site-packages", ".DS_Store", "dist" }
+telescope.setup({
+	pickers = {
+		live_grep = {
+			file_ignore_patterns = ignore,
+			additional_args = function(_)
+				return { "--hidden" }
+			end,
+		},
+		find_files = {
+			file_ignore_patterns = ignore,
+			hidden = true,
+			follow = true,
+			no_ignore = true,
+		},
+	},
+})
+
+vim.keymap.set("n", "<leader>pf", "<cmd>Telescope find_files<cr>")
+vim.keymap.set("n", "<leader>ps", "<cmd>Telescope live_grep<cr>")
+vim.keymap.set("n", "<leader>ph", "<cmd>Telescope help_tags<cr>")
+vim.keymap.set("n", "<leader>pb", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "<leader>pm", "<cmd>Telescope man_pages<cr>")
+
 local harpoon = require("harpoon")
 harpoon:setup()
+
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+	local file_paths = {}
+	for _, item in ipairs(harpoon_files.items) do
+		table.insert(file_paths, item.value)
+	end
+
+	require("telescope.pickers")
+		.new({}, {
+			prompt_title = "Harpoon",
+			finder = require("telescope.finders").new_table({
+				results = file_paths,
+			}),
+			previewer = conf.file_previewer({}),
+			sorter = conf.generic_sorter({}),
+		})
+		:find()
+end
+
 vim.keymap.set("n", "<leader>a", function()
 	harpoon:list():add()
 end)
 vim.keymap.set("n", "<C-e>", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
+	toggle_telescope(harpoon:list())
 end)
 vim.keymap.set("n", "<C-h>", function()
 	harpoon:list():select(1)
@@ -67,29 +115,6 @@ end)
 vim.keymap.set("n", "<C-S-N>", function()
 	harpoon:list():next()
 end)
-
-local telescope = require("telescope")
-local ignore = { "node_modules", ".git", ".venv", "*_templ.go", "site-packages", ".DS_Store" }
-telescope.setup({
-	pickers = {
-		live_grep = {
-			file_ignore_patterns = ignore,
-			additional_args = function(_)
-				return { "--hidden" }
-			end,
-		},
-		find_files = {
-			file_ignore_patterns = ignore,
-			hidden = true,
-		},
-	},
-})
-
-vim.keymap.set("n", "<leader>pf", "<cmd>Telescope find_files<cr>")
-vim.keymap.set("n", "<leader>ps", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set("n", "<leader>ph", "<cmd>Telescope help_tags<cr>")
-vim.keymap.set("n", "<leader>pb", "<cmd>Telescope buffers<cr>")
-vim.keymap.set("n", "<leader>pm", "<cmd>Telescope man_pages<cr>")
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.g.undotree_WindowLayout = 3
@@ -138,7 +163,7 @@ vim.lsp.config("*", {
 vim.lsp.config("lua_ls", lua_settings)
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-vim.lsp.enable({ "lua_ls", "gopls", "zls" })
+vim.lsp.enable({ "lua_ls", "gopls", "zls", "ts_ls", "cssls", "tailwindcss", "pylsp", "templ" })
 
 local function print_diagnostics()
 	local function by_line_num(a, b)
@@ -182,7 +207,6 @@ require("conform").setup({
 		python = { "yapf" },
 		-- You can customize some of the format options for the filetype (:help conform.format)
 		rust = { "rustfmt", lsp_format = "fallback" },
-		swift = { "swift" },
 
 		templ = { "templ" },
 		typescript = { "biome" },
@@ -197,4 +221,86 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function(args)
 		require("conform").format({ bufnr = args.buf })
 	end,
+})
+
+local wrap_enabled = false
+
+local function toggle_wrap()
+	if wrap_enabled then
+		vim.opt.wrap = false
+		vim.opt.linebreak = false
+
+		local mappings = { "j", "k", "0", "^", "$" }
+		for _, key in ipairs(mappings) do
+			vim.api.nvim_del_keymap("n", key)
+			vim.api.nvim_del_keymap("v", key)
+		end
+
+		wrap_enabled = false
+		print("Wrap disabled")
+	else
+		vim.opt.wrap = true
+		vim.opt.linebreak = true
+
+		local mapping_opts = { noremap = true, silent = true }
+		vim.api.nvim_set_keymap("n", "j", "gj", mapping_opts)
+		vim.api.nvim_set_keymap("n", "k", "gk", mapping_opts)
+		vim.api.nvim_set_keymap("n", "0", "g0", mapping_opts)
+		vim.api.nvim_set_keymap("n", "^", "g^", mapping_opts)
+		vim.api.nvim_set_keymap("n", "$", "g$", mapping_opts)
+		vim.api.nvim_set_keymap("v", "j", "gj", mapping_opts)
+		vim.api.nvim_set_keymap("v", "k", "gk", mapping_opts)
+		vim.api.nvim_set_keymap("v", "0", "g0", mapping_opts)
+		vim.api.nvim_set_keymap("v", "^", "g^", mapping_opts)
+		vim.api.nvim_set_keymap("v", "$", "g$", mapping_opts)
+
+		wrap_enabled = true
+		print("Wrap enabled")
+	end
+end
+
+vim.keymap.set("n", "<leader>e", toggle_wrap, { noremap = true, silent = true })
+
+require("image").opts = {
+	processor = "magick_cli",
+}
+
+require("image").setup({
+	backend = "kitty",
+	processor = "magick_cli",
+	integrations = {
+		markdown = {
+			enabled = true,
+			clear_in_insert_mode = false,
+			download_remote_images = true,
+			only_render_image_at_cursor = false,
+			only_render_image_at_cursor_mode = "popup", -- or "inline"
+			floating_windows = false, -- if true, images will be rendered in floating markdown windows
+			filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+		},
+		neorg = {
+			enabled = true,
+			filetypes = { "norg" },
+		},
+		typst = {
+			enabled = true,
+			filetypes = { "typst" },
+		},
+		html = {
+			enabled = false,
+		},
+		css = {
+			enabled = false,
+		},
+	},
+	max_width = nil,
+	max_height = nil,
+	max_width_window_percentage = nil,
+	max_height_window_percentage = 50,
+	scale_factor = 1.0,
+	window_overlap_clear_enabled = false, -- toggles images when windows are overlapped
+	window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "snacks_notif", "scrollview", "scrollview_sign" },
+	editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
+	tmux_show_only_in_active_window = false, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+	hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
 })

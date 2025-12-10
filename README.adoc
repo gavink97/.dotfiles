@@ -2,10 +2,31 @@
 Gavin Kondrath <78187175+gavink97@users.noreply.github.com>
 v1.0, 2024-04-01
 :toc:
+:toc-placement!:
 :homepage: https://github.com/gavink97
 
-== Introduction
-This is a collection of dotfiles for my personal use.
+++++
+ <picture>
+   <img alt="screenshot" src="./images/preview.jpg" />
+ </picture>
+++++
+
+== Setup
+- Terminal Emulator: https://github.com/ghostty-org/ghostty[ghostty]
+- Multiplexer: https://github.com/tmux/tmux[tmux]
+- Text editor: https://github.com/neovim/neovim[neovim]
+- Theme: https://github.com/sainnhe/everforest[everforest]
+- Shell: https://www.zsh.org/[zsh]
+- Shell prompt: https://github.com/starship/starship[starship]
+- Font: https://github.com/cormullion/juliamono[juliamono]
+- Window manager: https://github.com/hyprwm/Hyprland[hyprland]
+- Window manager MacOS: https://github.com/nikitabobko/AeroSpace[aerospace]
+- Application launcher: https://github.com/davatorium/rofi[rofi]
+- Notifications: https://github.com/ErikReider/SwayNotificationCenter[swaync]
+- Status bar: https://github.com/Alexays/Waybar[waybar]
+- PiP manager: https://github.com/gavink97/pipn[pipn]
+
+toc::[]
 
 == Getting Started
 
@@ -13,13 +34,10 @@ Place vault key here `~/.ansible-vault/vault.secret`
 
 === Prerequisites
 
-Macbook with Apple Silicon
-
 Supported Operating Systems::
     MacOS:::
     Linux:::
-        . Fedora Asahi Remix
-        . Ubuntu (Untested)
+        . https://github.com/gavink97/nixos[NixOS]
 
 Install the following packages:
 ....
@@ -37,9 +55,8 @@ ansible-playbook ansible/ansible.yml --ask-become-pass
 python3 ansible/files/encrypt.py -d
 ....
 
-Manually install tmux, tpm, neovim plugins, fonts, docker, tailwind
+Manually install tmux, tpm, fonts, docker
 
 == Roadmap
 * [ ] Move to using python over bash
 * [ ] Update Ansible playbooks
-* [x] NixOS
